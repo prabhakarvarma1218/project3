@@ -3,12 +3,12 @@ pipeline {
   stages {
     stage("Clear Workspace"){
         steps {
-          sh 'rm -rvf t*'
+          sh 'rm -rvf p*'
         }
     }
     stage("Checkout") {
         steps {
-        sh 'git clone https://github.com/KrishnaMaddila/tomcat.git'
+        sh 'git clone https://github.com/prabhakarvarma1218/project3.git'
       }
     }
     stage('GCP Auth') {
