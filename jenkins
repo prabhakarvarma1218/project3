@@ -20,7 +20,7 @@ pipeline {
     }
     stage("Docker pull") {
       steps {
-        withCredentials([usernameColonPassword(credentialsId: 'd91bb50f-c78b-401a-b0ed-7a2999501a2c', variable: 'DOCKER')])  {
+        withCredentials([usernameColonPassword(credentialsId: '6f945c9f-1569-41b1-8bef-851e58773d56', variable: 'DOCKER')]) {
         sh 'docker login -u prabhakarvarma1218 -p moksha@1218'
         sh 'docker pull prabhakarvarma1218/spark:tag1'
        }
