@@ -22,19 +22,19 @@ pipeline {
       steps {
         withCredentials([usernameColonPassword(credentialsId: 'd91bb50f-c78b-401a-b0ed-7a2999501a2c', variable: 'DOCKER')])  {
         sh "docker login -u prabhakar1218 -p moksha@1218"
-        sh 'docker pull krishnavirat/apachetomcat:tag2'
+        sh 'docker pull prabhakarvarma1218/spark:tag1
        }
      }
     }
     stage("Docker tag") {
       steps {     
-         sh 'docker tag krishnavirat/apachetomcat:tag2 gcr.io/model-argon-389809/tomcat:test1'
+         sh 'docker tag prabhakarvarma1218/spark:tag1 gcr.io/prabhakar-409305/spark:test1'
       }
     }
     stage("Docker push") { 
         steps {
              sh 'gcloud auth configure-docker'
-             sh 'docker push gcr.io/model-argon-389809/tomcat:test1'
+             sh 'docker push gcr.io/prabhakar-409305/spark:test1'
            }
         }
      stage("cluster create") {
@@ -44,7 +44,7 @@ pipeline {
      }
     stage("Create & expose deploy") {
        steps {
-         sh 'kubectl create deployment apachetomcat --image=gcr.io/model-argon-389809/tomcat:test1'
+         sh 'kubectl create deployment apachetomcat --image=gcr.io/prabhakar-409305/spark:test1'
          sh 'kubectl expose deployment apachetomcat --type=LoadBalancer --port 80 --target-port 8080'
        }
     }
