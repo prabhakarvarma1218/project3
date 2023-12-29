@@ -13,7 +13,7 @@ pipeline {
     }
     stage('GCP Auth') {
         steps {
-         withCredentials([usernameColonPassword(credentialsId: 'b77b6d15-d27c-4fdd-97b2-b18808d2b6cf', variable: 'GCP_PROJECTS'), file(credentialsId: 'c0527ad4-694e-4544-99c4-4f60bc1a77f7', variable: 'GCP_CREDENTIALS')]) {
+         withCredentials([usernameColonPassword(credentialsId: 'e015cf90-2ee8-41e9-906f-90c2f0b96051', variable: 'GCP_PROJECTS'), file(credentialsId: '5f1bea54-9baa-4148-9db8-eccaeeddbace', variable: 'GCP_CREDENTIALS')])  {
          sh 'gcloud auth activate-service-account --key-file=$GCP_CREDENTIALS'
         }
       }
@@ -28,13 +28,13 @@ pipeline {
     }
     stage("Docker tag") {
       steps {     
-         sh 'docker tag prabhakarvarma1218/spark:tag1 gcr.io/prabhakar-409305/spark:test2'
+         sh 'docker tag prabhakarvarma1218/spark:tag1 gcr.io/model-argon-389809/spark:test2'
       }
     }
     stage("Docker push") { 
         steps {
              sh 'gcloud auth configure-docker'
-             sh 'docker push gcr.io/prabhakar-409305/spark:test2'
+             sh 'docker push gcr.io/model-argon-389809/spark:test2'
            }
         }
      stage("cluster create") {
@@ -44,7 +44,7 @@ pipeline {
      }
     stage("Create & expose deploy") {
        steps {
-         sh 'kubectl create deployment apachetomcat --image=gcr.io/prabhakar-409305/spark:test2'
+         sh 'kubectl create deployment apachetomcat --image=gcr.io/model-argon-389809/spark:test2'
          sh 'kubectl expose deployment apachetomcat --type=LoadBalancer --port 80 --target-port 8080'
        }
     }
