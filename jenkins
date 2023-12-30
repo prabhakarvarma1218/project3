@@ -13,14 +13,14 @@ pipeline {
     }
     stage('GCP Auth') {
         steps {
-         withCredentials([usernameColonPassword(credentialsId: 'c257d07a-4a22-4c52-b144-b4dc5a8c1b6f', variable: 'GCP_PROJECTS'), file(credentialsId: '50484db1-f409-4d45-bc23-e1bded589645', variable: 'GCP_CREDENTIALS')]) {
+         withCredentials([usernameColonPassword(credentialsId: 'fb1904be-ba23-43e4-b5d3-9b8941900198', variable: 'GCP_PROJECTS'), file(credentialsId: 'cf29bd52-a354-4ca2-afea-ae0859a0915d', variable: 'GCP_CREDENTIALS')]) {
          sh 'gcloud auth activate-service-account --key-file=$GCP_CREDENTIALS'
         }
       }
     }
     stage("Docker pull") {
       steps {
-        withCredentials([usernameColonPassword(credentialsId: '6f945c9f-1569-41b1-8bef-851e58773d56', variable: 'DOCKER')]) {
+        withCredentials([usernameColonPassword(credentialsId: '39986bbb-5ad2-449a-b592-4b5afe0c1e72', variable: 'DOCKER')]) {
         sh 'docker login -u prabhakarvarma1218 -p moksha@1218'
         sh 'docker pull prabhakarvarma1218/spark:tag1'
        }
