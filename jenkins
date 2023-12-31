@@ -23,18 +23,21 @@ pipeline {
         withCredentials([usernameColonPassword(credentialsId: '39986bbb-5ad2-449a-b592-4b5afe0c1e72', variable: 'DOCKER')]) {
         sh 'docker login -u prabhakarvarma1218 -p moksha@1218'
         sh 'docker pull prabhakarvarma1218/spark:tag1'
+        sh 'docker pull prabhakarvarma1218/talented:tag'
        }
      }
     }
     stage("Docker tag") {
       steps {     
          sh 'docker tag prabhakarvarma1218/spark:tag1 gcr.io/model-argon-389809/spark:test2'
+         sh 'docker tag prabhakarvarma1218/talented:tag gcr.io/model-argon-389809/talented:tag2'
       }
     }
     stage("Docker push") { 
         steps {
              sh 'gcloud auth configure-docker'
              sh 'docker push gcr.io/model-argon-389809/spark:test2'
+             sh 'docker push gcr.io/model-argon-389809/talented:tag2'
            }
         }
      stage("cluster create") {
@@ -45,6 +48,7 @@ pipeline {
     stage("Create & expose deploy") {
        steps {
          sh 'kubectl create deployment datawarehouse-spark --image=gcr.io/model-argon-389809/spark:test2'
+         sh 'kubectl create deployment datawarehouse-spark --image=gcr.io/model-argon-389809/talented:tag2'
          sh 'kubectl expose deployment datawarehouse-spark --type=LoadBalancer --port 80 --target-port 8080'
        }
     }
