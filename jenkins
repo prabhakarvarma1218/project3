@@ -39,14 +39,13 @@ pipeline {
         }
      stage("cluster create") {
        steps {
-          sh 'gcloud container clusters create spark-cluster --num-nodes 3 --location=asia-east1-a'
+          sh 'gcloud container clusters create talend-cluster --num-nodes 3 --location=asia-east1-a'
        }
      }
     stage("Create & expose deploy") {
        steps {
-         sh 'kubectl create deployment datawarehouse-spark --image=gcr.io/model-argon-389809/spark:test2'
-         sh 'kubectl create deployment datawarehouse-talend --image=gcr.io/model-argon-389809/talented:tag2'
-         sh 'kubectl expose deployment datawarehouse-spark --type=LoadBalancer --port 80 --target-port 8080'
+         sh 'kubectl create deployment datawarehouse-talend --image=gcr.io/ajay-409305/talend:gcp'
+         sh 'kubectl expose deployment datawarehouse-talend --type=LoadBalancer --port 80 --target-port 8080'
        }
     }
   }  
