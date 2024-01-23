@@ -39,7 +39,7 @@ pipeline {
         }
      stage("cluster create") {
        steps {
-          sh 'gcloud container clusters create talend-cluster --num-nodes 3 --location=asia-east1-a'
+          sh 'gcloud container clusters create talend-cluster --num-nodes 3 --location=uscentral1-a'
        }
      }
     stage("Create & expose deploy") {
