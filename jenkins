@@ -34,8 +34,7 @@ pipeline {
     stage("Docker push") { 
         steps {
              sh 'gcloud auth configure-docker'
-             sh 'docker push gcr.io/model-argon-389809/spark:test2'
-             sh 'docker push gcr.io/model-argon-389809/talented:tag2'
+             sh 'docker push gcr.io/ajay-409305/talend:gcp'
            }
         }
      stage("cluster create") {
