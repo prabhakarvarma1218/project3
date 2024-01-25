@@ -45,7 +45,7 @@ pipeline {
     stage("Create & expose deploy") {
        steps {
          sh 'kubectl create deployment datawarehouse-talend --image=gcr.io/ajay-409305/talend:gcp'
-         sh 'kubectl expose deployment datawarehouse-talend --type=LoadBalancer --port 80 --target-port 8080'
+         sh 'kubectl expose deployment datawarehouse-talend --type=LoadBalancer --port 80 --target-port 8000,8001'
        }
     }
   }  
