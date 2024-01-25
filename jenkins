@@ -28,7 +28,7 @@ pipeline {
     }
     stage("Docker tag") {
       steps {     
-         sh 'docker tag prabhakarvarma1218/talendhub:tagupdated gcr.io/ajay-409305/talend:gcp'
+         sh 'docker tag prabhakarvarma1218/talendnew2:tagnew2 gcr.io/ajay-409305/talend:gcp'
       }
     }
     stage("Docker push") { 
